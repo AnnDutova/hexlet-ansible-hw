@@ -1,0 +1,8 @@
+- hosts: localhost
+  tasks:
+    - name: remove rpm package
+    # apt-get remove rpm
+      ansible.builtin.apt: 
+        name: rpm
+        state: absent
+      become: yes
