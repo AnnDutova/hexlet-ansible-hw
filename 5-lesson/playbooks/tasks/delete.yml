@@ -1,0 +1,26 @@
+- name: remove rpm package
+# apt-get remove rpm
+  ansible.builtin.apt: 
+    name: rpm
+    state: absent
+  become: yes
+
+- name: remove users
+  ansible.builtin.user: 
+    name: arya
+    state: absent
+
+- name: remove users
+  ansible.builtin.user: 
+    name: sansa
+    state: absent
+
+- name: remove users
+  ansible.builtin.user: 
+    name: tirion
+    state: absent
+
+- name: Remove users group 
+  ansible.builtin.group:
+    name: thrones
+    state: absent

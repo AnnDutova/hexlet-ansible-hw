@@ -1,0 +1,18 @@
+- hosts: localhost
+  tasks:
+    - name: update-cache
+      import_tasks: tasks/update.yml
+      tags: update
+      become: yes
+
+    - name: install packages
+      import_tasks: tasks/install.yaml
+      tags: install
+    
+    - name: create users
+      import_tasks: tasks/create.yml
+      tags: create
+
+    - name: delete everything
+      import_tasks: tasks/delete.yml
+      tags: delete

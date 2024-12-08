@@ -1,0 +1,25 @@
+- name: Create users group 
+  ansible.builtin.group:
+    name: thrones
+    state: present
+
+- name: Create user arya
+  ansible.builtin.user:
+    name: arya
+    comment: Arya Stark
+    groups: thrones
+    append: yes
+
+- name: Create user sansa
+  ansible.builtin.user:
+    name: sansa
+    comment: Sansa Stark
+    groups: thrones
+    append: yes
+
+- name: Create user tirion
+  ansible.builtin.user:
+    name: tirion
+    comment: Half-husband
+    groups: thrones
+    append: yes

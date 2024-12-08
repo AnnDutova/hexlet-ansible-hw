@@ -1,0 +1,6 @@
+- name: instal rpm package
+# apt-get update && apt-get install rpm
+  ansible.builtin.apt: 
+    name: rpm
+    state: present
+    update_cache: yes 
