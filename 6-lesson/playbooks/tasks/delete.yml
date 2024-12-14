@@ -1,0 +1,18 @@
+- name: delete nginx package
+# apt-get update && apt-get install nginx
+  ansible.builtin.apt: 
+    name: nginx
+    state: absent
+  become: yes
+
+- name: Delete index.html
+  ansible.builtin.file:
+    state: absent
+    path: /usr/share/nginx/html/index.html
+  become: yes
+
+- name: Delete nginx.conf
+  ansible.builtin.file:
+    state: absent
+    path: /etc/nginx/nginx.conf
+  become: yes

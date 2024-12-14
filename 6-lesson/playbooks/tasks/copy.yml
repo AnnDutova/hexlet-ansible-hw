@@ -1,0 +1,19 @@
+- name: copy index.html
+  ansible.builtin.copy: 
+    src: ../files/index.html
+    dest: /usr/share/nginx/html/index.html
+    owner: ann
+    group: ann
+    mode: '0755'
+  become: yes  
+  
+- name: copy nginx.conf
+  ansible.builtin.copy: 
+    src: ../files/nginx.conf
+    dest: /etc/nginx/nginx.conf
+    owner: ann
+    group: ann
+    mode: '0755'
+  notify:
+    - restart nginx
+  become: yes
