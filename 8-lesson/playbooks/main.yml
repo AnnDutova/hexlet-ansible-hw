@@ -1,0 +1,18 @@
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: install nginx
+      import_tasks: tasks/install.yml
+      tags: install
+      become: yes
+
+    - name: copy nginx conf
+      import_tasks: tasks/copy.yml
+      tags: install
+
+    - name: delete nginx 
+      import_tasks: tasks/delete.yml
+      tags: delete
+  
+  handlers:
+    - import_tasks: handlers/reload.yml
