@@ -1,0 +1,6 @@
+- name: instal nginx package
+# apt-get update && apt-get install nginx
+  ansible.builtin.apt: 
+    name: nginx
+    state: present
+    update_cache: yes 
