@@ -1,0 +1,20 @@
+- hosts: localhost
+  gather_facts: no
+  vars:
+    users: 
+      - jaime
+      - sansa
+      - robert
+
+  tasks:
+    - name: create users
+      import_tasks: tasks/create.yml
+      become: yes
+    
+    - name: configurate git
+      import_tasks: tasks/configurate.yml
+      become: yes
+
+    - name: load pkey
+      import_tasks: tasks/load.yml
+      become: yes
