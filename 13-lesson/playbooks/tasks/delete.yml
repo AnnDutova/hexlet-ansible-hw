@@ -1,0 +1,30 @@
+- name: stop nginx service 
+  ansible.builtin.service:
+    name: nginx
+    state: stopped   
+
+- name: delete nginx package
+# apt-get update && apt-get install nginx
+  ansible.builtin.apt: 
+    name: nginx
+    state: absent
+    autoremove: yes
+    purge: true
+
+- name: delete cowsay package
+# apt-get update && apt-get install cowsay
+  ansible.builtin.apt: 
+    name: cowsay
+    state: absent
+    autoremove: yes
+    purge: true
+
+- name: Delete index.html
+  ansible.builtin.file:
+    state: absent
+    path: /usr/share/nginx/html/index.html
+
+- name: Delete nginx.conf
+  ansible.builtin.file:
+    state: absent
+    path: /etc/nginx/nginx.conf

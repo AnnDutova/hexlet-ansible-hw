@@ -1,0 +1,13 @@
+- name: install nginx package
+# apt-get install nginx
+  ansible.builtin.apt: 
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: install cowsay package
+# apt-get update && apt-get install cowsay
+  ansible.builtin.apt: 
+    name: cowsay
+    state: present
+    update_cache: yes

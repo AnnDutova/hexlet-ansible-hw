@@ -1,0 +1,29 @@
+- hosts: localhost
+
+  vars:
+    server_msg: "This is server {{ ansible_facts['nodename'] | upper }}"
+    nginx_port: 8080
+    index_folder: /usr/share/nginx/html
+    root_dir: /etc/nginx
+
+  tasks:
+    - name: install 
+      import_tasks: tasks/install.yml
+      tags: install
+      become: yes
+    
+    - name: run and registre cowsay
+      import_tasks: tasks/run.yml
+      tags: install
+
+    - name: copy nginx conf
+      import_tasks: tasks/copy.yml
+      tags: install
+
+    - name: delete dependencies 
+      import_tasks: tasks/delete.yml
+      tags: delete
+      become: yes
+  
+  handlers:
+    - import_tasks: handlers/reload.yml

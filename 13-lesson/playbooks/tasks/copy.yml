@@ -1,0 +1,19 @@
+- name: copy index.html
+  ansible.builtin.template: 
+    src: ../template/index.html.j2
+    dest: "{{ index_folder }}/index.html"
+    owner: ann
+    group: ann
+    mode: '0755'
+  become: yes  
+  
+- name: copy nginx.conf
+  ansible.builtin.template: 
+    src: ../template/nginx.conf.j2
+    dest: "{{ root_dir }}/nginx.conf"
+    owner: ann
+    group: ann
+    mode: '0755'
+  notify:
+    - restart nginx
+  become: yes

@@ -1,0 +1,6 @@
+- name: run pwd command
+  ansible.builtin.shell: pwd
+
+- name: run cowsay command
+  ansible.builtin.shell: cowsay "{{ server_name }}"
+  register: cowsay_result
