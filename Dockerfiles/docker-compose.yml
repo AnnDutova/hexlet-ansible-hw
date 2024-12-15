@@ -1,0 +1,28 @@
+version: '3'
+services:
+  ubuntu_container:
+    build:
+      context: .
+      dockerfile: Dockerfile.ubuntu
+    networks:
+      mynet:
+        ipv4_address: 172.20.0.2
+    ports:
+      - "2222:22"  # Проброс порта для SSH
+
+  centos_container:
+    build:
+      context: .
+      dockerfile: Dockerfile.centos
+    networks:
+      mynet:
+        ipv4_address: 172.20.0.3
+    ports:
+      - "2223:22"  # Проброс порта для SSH
+
+networks:
+  mynet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

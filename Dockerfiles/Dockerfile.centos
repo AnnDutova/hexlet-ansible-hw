@@ -1,0 +1,28 @@
+FROM centos:latest
+
+RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+
+RUN yum -y update && yum -y install \
+    openssh-server \
+    curl \
+    vim \
+    && yum clean all
+
+RUN ssh-keygen -A 
+
+# Создание директории для SSH
+RUN mkdir /var/run/sshd
+
+# Установите пароль для root 
+RUN echo 'root:rootpassword' | chpasswd
+
+# Разрешите root вход по SSH
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+# Отключите проверку PAM
+RUN sed -i 's@session required pam_loginuid.so@session optional pam_loginuid.so@g' /etc/pam.d/sshd
+
+
+EXPOSE 22
+CMD ["/usr/sbin/sshd", "-D"]

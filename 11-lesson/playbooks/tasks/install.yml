@@ -1,0 +1,16 @@
+- name: instal git package
+# apt-get update && apt-get install git
+  ansible.builtin.apt: 
+    name: git
+    state: present
+    update_cache: yes 
+  when: ansible_distribution == "Ubuntu"
+
+- name: instal git package
+# apt-get update && apt-get install git
+  ansible.builtin.yum: 
+    name: git
+    state: present
+    update_cache: yes 
+  when: ansible_distribution == "CentOS" and
+        (ansible_distribution_major_version == "6" or ansible_distribution_major_version == "7")

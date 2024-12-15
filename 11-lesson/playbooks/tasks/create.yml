@@ -1,0 +1,13 @@
+- name: Create users group 
+  ansible.builtin.group:
+    name: thrones
+    state: present
+    system: true
+  
+
+- name: "Create user {{ item }}"
+  ansible.builtin.user:
+    name: "{{ item }}"
+    groups: thrones
+    append: yes
+  loop: "{{ users }}"

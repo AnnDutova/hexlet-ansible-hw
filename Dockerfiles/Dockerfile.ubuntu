@@ -1,0 +1,22 @@
+FROM ubuntu:latest
+
+RUN apt-get update && apt-get install -y \
+    openssh-server \
+    sshpass \
+    curl \
+    vim \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir /var/run/sshd
+
+# Установите пароль для root 
+RUN echo 'root:rootpassword' | chpasswd
+
+# Разрешите root вход по SSH
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+# Отключите проверку PAM
+RUN sed -i 's@session required pam_loginuid.so@session optional pam_loginuid.so@g' /etc/pam.d/sshd
+
+EXPOSE 22
+CMD ["/usr/sbin/sshd", "-D"]

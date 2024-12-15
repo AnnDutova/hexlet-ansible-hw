@@ -1,0 +1,5 @@
+- name: copy gitconfig
+  ansible.builtin.template: 
+    src: ../template/gitconfig.j2
+    dest: "/home/{{ item }}/.gitconfig"
+  loop: "{{ users }}"
