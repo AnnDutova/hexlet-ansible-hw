@@ -1,0 +1,17 @@
+- hosts: webservers
+  roles:
+    - { role: nginxinc.nginx, become: yes }
+
+- hosts: all
+  tasks:
+    - name: "Install docker-ce-cli"
+      ansible.builtin.apt:
+        name: "docker-ce-cli=5:25.0.3-1~ubuntu.22.04~jammy"
+        state: present
+        allow_downgrade: true
+        allow_change_held_packages: true
+
+    - name: NodeJS
+      import_role:
+        name: geerlingguy.nodejs
+      become: yes
